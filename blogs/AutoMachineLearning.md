@@ -1,24 +1,23 @@
 ## Auto Machine Learning
 
-The traditional development of predictive solutions is challenging and time consuming, that requires expert resources in software development, data engineering, and data science. Typically an engineer is required to complete the following tasks in an iterative and cyclical manner.   
+Traditionally, the development of predictive solutions is a challenging and time consuming process that requires expert resources in software development, data engineering, and data science. Engineers are required to complete the following tasks in an iterative and cyclical manner.   
 1. Preprocess, feature engineer, and clean data
 1. Select appropriate model
 1. Tune Hyperparameters 
 1. Analyze Results
 
-As the industry identified the blockers that make the development of machine learning solutions costly, we aim to figure out a way to automate the process in an attempt to make it easier and faster to deploy intelligent solutions. Therefore, selecting and tuning models can be automated to make the results analysis easier for non-expert and expert developers.   
+As the industry identified the blockers that make the development of machine learning solutions costly, we aim to figure out a way to automate the process in an attempt to make it easier and faster to deploy intelligent solutions. Therefore, selecting and tuning models can be automated to make the analysis of results easier for non-expert and expert developers.   
 
 Automated machine learning is the ability to have a defined dataset with a specific target feature, and automatically iterate over the dataset with different algorithms and combination of input variables to select the best model. The purpose is to make developing this solutions require less resources, less domain knowledge, and less time. 
 
 ### How it works
-
 Most Auto ML libraries available are used to solve supervised learning in order to solve specific problems. If you are unfamiliar, there ar two main categories of machine learning.  
 - **Supervised Learning**: is where you have input variables and output variables, and you apply algorithms to learn the mapping function of input to output.    
 - **Unsupervised Learning**: is where you have input variables but no output variables to map them to. The goal is typically to identify trends and patterns in the data to make assumptions.  
 
-Note there is a category called **semi-supervised learning** but we will not get into that here.  
+Note there is a category called **semi-supervised learning** but we will not get into that here. But it is simply a combination of the two categories above.    
 
-In order to use auto machine learning you dataset must be feature engineered. Meaning, you manaully develop transformations to create a machine learning dataset to solve your problem. Most Auto ML libraries have built in transformation functions to solve the most popular tranformation steps, but in my experience these functions are rarely enough to get data machine learning ready. 
+In order to use auto machine learning your dataset must be feature engineered. Meaning, you manaully develop transformations to create a machine learning dataset to solve your problem. Most Auto ML libraries have built in transformation functions to solve the most popular tranformation steps, but in my experience these functions are rarely enough to get data machine learning ready. 
 
 Once you have featured engineer your dataset the developer simply needs to determine the type of algorithm they need. Most supervised learning algorithms can be classified as: 
 
@@ -26,8 +25,11 @@ Once you have featured engineer your dataset the developer simply needs to deter
 - **Regression**: The output is a numeric value. For example, predicting the prices of a car or house. 
 
 
-When given a algorithm type, Auto ML libraries will run iterations over your dataset to determine the best combination features, and best hyperparameters for each algorithm, learn the best algorithm.    
+When given a algorithm type, Auto ML libraries will run iterations over your dataset to determine the best combination features, and best hyperparameters for each algorithm, learn the best algorithm. 
 
+I would like to highlight the differences between having to engineer columns for machine learning, and selecting the appropriate columns for machine learning. For example, lets assume I want to predict how many point of sale transactions will occur every hour of the day. The raw dataset is likely transactional, therefore, will require a developer to summarize the data at the hour level i.e. grouping, summing, and averaging. But often times developers will create custom functions in order to describe the trends in the dataset. This process is **feature engineering**. 
+
+**Feature selection** comes after feature engineering. I may summarize my dataset with 10 different columns that I *believe* will be useful, but Auto ML libraries may select the 8 best columns out of the 10. 
 
 ### Available Libraries
 
@@ -40,4 +42,4 @@ When given a algorithm type, Auto ML libraries will run iterations over your dat
 [AzureML](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-automated-ml), an end to end platform for machine learning development and deployment. The library enables faster iterations by manage and tracking experiments, and fully supports most python-based frameworks like PyTorch, Tensorflow, and sci-kit learn. The Auto ML feature is baked into the platform to make it easy to select your model.   
 
 
-Check out the libraries above! Automated machine learning is fun to play around with and apply to problems. 
+Check out the libraries above! Automated machine learning is fun to play around with and apply to problems. I will be creating demos and walk throughs of each of these libraries. Once public you will be able to find them on my [GitHub](https://github.com/ryanchynoweth44/AutoMLExamples). 
