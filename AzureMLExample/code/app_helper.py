@@ -16,6 +16,11 @@ class AppHelper(object):
         self.username = None
         self.password = None
         self.tenant_id = None
+        self.storage_name = None
+        self.storage_key = None
+        self.azure_data_container = None
+        self.azure_data_path = None
+        self.local_data_path = None
         self.set_config(config_file, env)
 
     def set_config(self, config_file,  env):
@@ -36,3 +41,8 @@ class AppHelper(object):
         self.username = config.get(env, "USERNAME")
         self.password = config.get(env, "PASSWORD")
         self.tenant_id = config.get(env, "TENANT_ID")
+        self.storage_name = config.get(env, "STORAGE_NAME")
+        self.storage_key = config.get(env, "STORAGE_KEY")
+        self.azure_data_container = config.get(env, "AZURE_DATA_CONTAINER")
+        self.azure_data_path = config.get(env, "AZURE_DATA_PATH")
+        self.local_data_path = config.get(env, "LOCAL_DATA_PATH")

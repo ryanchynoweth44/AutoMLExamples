@@ -31,6 +31,9 @@ I would like to highlight the differences between having to engineer columns for
 
 **Feature selection** comes after feature engineering. I may summarize my dataset with 10 different columns that I *believe* will be useful, but Auto ML libraries may select the 8 best columns out of the 10. 
 
+When Auto Machine Learning libraries are used in the development proces the output is usually a dataset containing metadata on the training runs and their results. This dataset enables devlopers to easily choose the best model based off the metrics provided. Being able to choose the best model out of many training iterations with different algorithms and feature columns automatically is that it enables us to easily automate the model selection process for *each* model deployment. With typical machine learning deployments, engineers typically deploy the same algorithm with the same feature columns each time. But with Auto Machine Learning solutions we are able to note only choose the best algorithm, feature combination, and hyper-parameters each time. That means, we can deploy a decision tree model trained on 4 columns one release, the deploy a logistic regression model trained on 5 columns another release without any code edits. This is so simple, yet so awesome about how easy it can be!  
+
+
 ### Available Libraries
 
 [MLBox](https://github.com/AxeldeRomblay/MLBox), a python library for automated machine learning. Key features include distributed processing of data, robust feature selection, accurate hyperparameter tuning, deep learning support, and model interpretation.  
@@ -41,5 +44,6 @@ I would like to highlight the differences between having to engineer columns for
 
 [AzureML](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-automated-ml), an end to end platform for machine learning development and deployment. The library enables faster iterations by manage and tracking experiments, and fully supports most python-based frameworks like PyTorch, Tensorflow, and sci-kit learn. The Auto ML feature is baked into the platform to make it easy to select your model.   
 
+[Ludwig](), a TensorFlow based platform for deep learning solutions was released by Uber to enable users with little coding experience. The developer simply needs to provide a training dataset and a configuration file identifying the features and labels desired. 
 
 Check out the libraries above! Automated machine learning is fun to play around with and apply to problems. I will be creating demos and walk throughs of each of these libraries. Once public you will be able to find them on my [GitHub](https://github.com/ryanchynoweth44/AutoMLExamples). 

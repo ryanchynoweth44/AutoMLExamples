@@ -5,14 +5,13 @@ Our first step is to set up development environment. For python development I us
 ### Create Local Environment 
 1. Create an Anaconda virtual environment with pandas installed and attach use it has your python interpreter in VS Code. 
     ```
-    conda create -n azautoml python=3.7 pandas
+    conda create -n azautoml python=3.7 scikit-learn
     ```
 
 1. Next pip install the following. 
     ```
     pip install azureml-sdk 
     pip install matplotlib
-    pip install sklearn
     ```
 
 ### Create Azure Resources
@@ -34,6 +33,11 @@ Our first step is to set up development environment. For python development I us
     USERNAME = <client id>
     PASSWORD = <client secret>
     TENANT_ID = <tenant id>
+    STORAGE_NAME = <azure storage name>
+    STORAGE_KEY = <azure storage key>
+    AZURE_DATA_CONTAINER = <storage account data container>
+    AZURE_DATA_PATH = <path to data file in storage account>
+    LOCAL_DATA_PATH = <local path to file>
     ```
 
 1. Once you have created your `app_config.conf` file lets quickly create our `app_helper.py` class. In smaller and public projects like these I will create a class to easily handle my global variables and secrets. This allows me to ignore the ".conf" file type with git so that my secrets are not exposed. Create a python file called `app_helper.py` in your application directory and paste the following code. 
@@ -56,6 +60,11 @@ Our first step is to set up development environment. For python development I us
             self.username = None
             self.password = None
             self.tenant_id = None
+            self.storage_name = None
+            self.storage_key = None
+            self.azure_data_container = None
+            self.azure_data_path = None
+            self.local_data_path = None
             self.set_config(config_file, env)
 
         def set_config(self, config_file,  env):
@@ -76,6 +85,12 @@ Our first step is to set up development environment. For python development I us
             self.username = config.get(env, "USERNAME")
             self.password = config.get(env, "PASSWORD")
             self.tenant_id = config.get(env, "TENANT_ID")
+            self.storage_name = config.get(env, "STORAGE_NAME")
+            self.storage_key = config.get(env, "STORAGE_KEY")
+            self.azure_data_container = config.get(env, "AZURE_DATA_CONTAINER")
+            self.azure_data_path = config.get(env, "AZURE_DATA_PATH")
+            self.local_data_path = config.get(env, "LOCAL_DATA_PATH")
+
     ```
 
 Now that you have set up your project, it is time to move onto training your model! Navigate to the [train model](./02_TrainModel.md) steps to continue. 
