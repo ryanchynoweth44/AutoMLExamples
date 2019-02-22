@@ -25,7 +25,7 @@ Once you have featured engineer your dataset the developer simply needs to deter
 - **Regression**: The output is a numeric value. For example, predicting the prices of a car or house. 
 
 
-When given a algorithm type, Auto ML libraries will run iterations over your dataset to determine the best combination features, and best hyperparameters for each algorithm, learn the best algorithm. 
+When given a algorithm type, Auto ML libraries will run iterations over your dataset to determine the best combination features, and best hyperparameters for each algorithm, therefore, in turn it actually trains many models and gives the engineer the best algorithm. 
 
 I would like to highlight the differences between having to engineer columns for machine learning, and selecting the appropriate columns for machine learning. For example, lets assume I want to predict how many point of sale transactions will occur every hour of the day. The raw dataset is likely transactional, therefore, will require a developer to summarize the data at the hour level i.e. grouping, summing, and averaging. But often times developers will create custom functions in order to describe the trends in the dataset. This process is **feature engineering**. 
 
@@ -44,6 +44,6 @@ When Auto Machine Learning libraries are used in the development proces the outp
 
 [AzureML](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-automated-ml), an end to end platform for machine learning development and deployment. The library enables faster iterations by manage and tracking experiments, and fully supports most python-based frameworks like PyTorch, Tensorflow, and sci-kit learn. The Auto ML feature is baked into the platform to make it easy to select your model.   
 
-[Ludwig](), a TensorFlow based platform for deep learning solutions was released by Uber to enable users with little coding experience. The developer simply needs to provide a training dataset and a configuration file identifying the features and labels desired. 
+[Ludwig](https://github.com/uber/ludwig), a TensorFlow based platform for deep learning solutions was released by Uber to enable users with little coding experience. The developer simply needs to provide a training dataset and a configuration file identifying the features and labels desired. 
 
 Check out the libraries above! Automated machine learning is fun to play around with and apply to problems. I will be creating demos and walk throughs of each of these libraries. Once public you will be able to find them on my [GitHub](https://github.com/ryanchynoweth44/AutoMLExamples). 
