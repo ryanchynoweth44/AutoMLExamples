@@ -36,7 +36,7 @@ df = pd.read_csv(helper.local_data_path)
 
 automl_settings = {
     "iteration_timeout_minutes" : 20,
-    "iterations" : 5,
+    "iterations" : 1,
     "primary_metric" : 'r2_score',
     "preprocess" : True,
     "verbosity" : logging.INFO,

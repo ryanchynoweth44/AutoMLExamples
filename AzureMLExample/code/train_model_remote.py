@@ -18,28 +18,28 @@ auth_obj = ServicePrincipalAuthentication(helper.tenant_id, helper.username, hel
 ws = Workspace.get(name=helper.aml_workspace_name, auth=auth_obj, subscription_id=helper.subscription_id, resource_group=helper.aml_resource_group )
 
 ## Experiment name and project folder
-experiment_name = 'auto-ml-demo2'
+experiment_name = 'demoautoml'
 project_folder = 'remote_automl'
 
 exp = Experiment(ws, experiment_name)
 
 
-dsvm_name = 'datascienceaml' #Name your DSVM
+dsvm_name = 'dlvmaml' #Name your DSVM
 try:
     dsvm_compute = AmlCompute(ws, dsvm_name)
     print('found existing dsvm.')
 except:
     print('creating new dsvm.')
     # Below is using a VM of SKU Standard_D2_v2 which is 2 core machine. You can check Azure virtual machines documentation for additional SKUs of VMs.
-    dsvm_config = AmlCompute.provisioning_configuration(vm_size = "Standard_D2_v2", max_nodes=2)
+    dsvm_config = AmlCompute.provisioning_configuration(vm_size = "Standard_NC6", max_nodes=2, min_nodes=0)
     dsvm_compute = AmlCompute.create(ws, name = dsvm_name, provisioning_configuration = dsvm_config)
     dsvm_compute.wait_for_completion(show_output = True)
 
 
 automl_settings = {
     "name": "AutoML_Demo_Experiment_{0}".format(time.time()),
-    "iteration_timeout_minutes": 20,
-    "iterations": 20,
+    "iteration_timeout_minutes": 40,
+    "iterations": 5,
     "n_cross_validations": 5,
     "primary_metric" : 'r2_score',
     "preprocess" : True,
@@ -57,3 +57,4 @@ automated_ml_config = AutoMLConfig(task='regression',
                             )
 
 remote_run = exp.submit(automated_ml_config, tags={'Category': 'DEMO'}, show_output=True)
+# https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-configure-auto-train
