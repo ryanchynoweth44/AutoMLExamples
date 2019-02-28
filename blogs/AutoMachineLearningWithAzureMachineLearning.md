@@ -47,6 +47,6 @@ The output of this process is a dataset containing metadata the training runs an
 
 ### My one compliant
 
-My one compliant could be that I was just not doing it right. However, the documentation of this library notes that it works with Python 3.5.2 and up. I was unable to get the proper libraries installed and working correctly using a Python 3.6 interpreter. However, I simply created a Python 3.5.6 interpreter and it worked great!  
+My one compliant is installing the library is difficult. The documentation states that it works with Python 3.5.2 and up, however, I was unable to get the proper libraries installed and working correctly using a Python 3.6 interpreter. I simply created a Python 3.5.6 interpreter and it worked great!  
 
 Overall, I think Azure Machine Learning' Auto ML works great. It is not ground breaking or a game changer, but it does exactly as advertised which is huge in the current landscape of data where it seems as if many tools do not work as expected. Azure ML will run iterations over your dataset to figure out the best model possible, but in the end predictive solutions depend on the correlation between your data points. For a more detailed example of Azure Machine Learning's AutoML feature check out my walk through available [here](https://github.com/ryanchynoweth44/AutoMLExamples/AzureMLExample/walkthrough/01_EnvironmentSetup.md). 

@@ -39,17 +39,17 @@ except:
 
 automl_settings = {
     "name": "AutoML_Demo_Experiment_{0}".format(time.time()),
-    "iteration_timeout_minutes": 120,
-    "iterations": 5,
+    "iteration_timeout_minutes": 60,
+    "iterations": 20,
     "n_cross_validations": 5,
-    "primary_metric" : 'r2_score',
+    "primary_metric" : 'accuracy',
     "preprocess" : True,
     "verbosity" : logging.INFO,
     "max_concurrent_iterations": nodes}
 
 ## note here that the project folder gets uploaded to our DSVM.
 ## therefore we must have any extra classes/files in there as well i.e. app_helper.py and app_config.conf
-automated_ml_config = AutoMLConfig(task='regression',
+automated_ml_config = AutoMLConfig(task='classification',
                              debug_log='automl_errors.log',
                              path=project_folder,
                              compute_target = dsvm_compute,
