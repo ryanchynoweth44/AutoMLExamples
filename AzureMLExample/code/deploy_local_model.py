@@ -1,8 +1,10 @@
 import pandas as pd
 import numpy as np
 import azureml.core
-from azureml.core.workspace import Workspace, Run
+from azureml.core import Workspace, Run
 from azureml.core.model import Model
+from azureml.core.authentication import ServicePrincipalAuthentication
+
 
 import logging, os
 
@@ -16,51 +18,55 @@ ws = Workspace.get(name=helper.aml_workspace_name, auth=auth_obj, subscription_i
 
 
 # copy the model to local directory for deployment
-model_name = "auto_ml_model.pkl"
+model_name = "local_auto_ml_model.pkl"
 model_path = "outputs/" + model_name
 deploy_folder = os.getcwd()
 
 # register the model 
-mymodel = Model.register(model_name = model_name, model_path = model_path )
+mymodel = Model.register(ws, model_name = model_name, model_path = model_path )
 
 score = """
  
+import pickle
 import json
 import numpy as np
 import os
-import pickle
+import azureml.train.automl
 from sklearn.externals import joblib
-
 from azureml.core.model import Model
  
 def init():    
   global model
   # retreive the path to the model file using the model name
-  model_path = Model.get_model_path('{model_name}')
+  model_path = Model.get_model_path(model_name  = '{model_name}')
   model = joblib.load(model_path)
     
     
 def run(raw_data):
-  data = np.array(json.loads(raw_data)['data'])
-  
-  # make prediction
-  y_hat = model.predict(data)
-  
-  # you can return any data type as long as it is JSON-serializable
-  return y_hat.tolist()
+  try: 
+    data = np.array(json.loads(raw_data)['data'])
+    
+    # make prediction
+    y_hat = model.predict(data)
+    
+    # you can return any data type as long as it is JSON-serializable
+    return json.dumps({"result":y_hat.tolist()})
+
+  except Exception as e: 
+    return json.dumps('Error': str(e) )
     
 """.format(model_name=model_name)
  
 exec(score)
  
-with open("score.py", "w") as file:
+with open("web_service_score.py", "w") as file:
     file.write(score)
 
 
 # Create a dependencies file
 from azureml.core.conda_dependencies import CondaDependencies 
 
-myenv = CondaDependencies.create(conda_packages=['scikit-learn']) #showing how to add libs as an eg. - not needed for this model.
+myenv = CondaDependencies.create(conda_packages=['numpy', 'scikit-learn'], pip_packages=['azureml-sdk[automl]']) #showing how to add libs as an eg. - not needed for this model.
 
 with open("myenv.yml","w") as f:
     f.write(myenv.serialize_to_string())
@@ -71,8 +77,8 @@ from azureml.core.webservice import AciWebservice, Webservice
 
 myaci_config = AciWebservice.deploy_configuration(cpu_cores=1, 
              memory_gb=1, 
-             tags={"data": "MNIST",  "method" : "sklearn"}, 
-             description='Predict MNIST with sklearn')
+             tags={"data": "Titanic",  "method" : "AutoML"}, 
+             description='Predict titanic with AutoML')
 
 
 # deploy to aci
@@ -80,15 +86,15 @@ from azureml.core.webservice import Webservice
 from azureml.core.image import ContainerImage
 
 # configure the image
-image_config = ContainerImage.image_configuration(execution_script="score.py", 
+image_config = ContainerImage.image_configuration(execution_script="web_service_score.py", 
                                                   runtime="python", 
                                                   conda_file="myenv.yml", 
                                                   description = "Auto ML model",
-                                                  tags = {"data": "nyctaxitip", "type": "regression"}
+                                                  tags = {"data": "titanic", "type": "classification"}
                                                 )
 
 service = Webservice.deploy_from_model(workspace=ws,
-                                       name='automl_webservice',
+                                       name='automlwebservice',
                                        deployment_config=myaci_config,
                                        models=[mymodel],
                                        image_config=image_config)
@@ -104,14 +110,15 @@ print(service.scoring_uri)
 import requests
 import json
 
+test_data = pd.read_csv("data/titanic_test.csv").values
 # send a random row from the test set to score
-random_index = np.random.randint(0, len(X_test)-1)
-input_data = "{\"data\": [" + str(list(X_test[random_index])) + "]}"
+random_index = np.random.randint(0, len(test_data)-1)
+input_data = "{\"data\": [" + str(list(test_data[random_index])) + "]}"
 
 headers = {'Content-Type':'application/json'}
 
 resp = requests.post(service.scoring_uri, input_data, headers=headers)
 
 print("POST to url", service.scoring_uri)
-print("label:", y_test[random_index])
+print("label:", test_data[random_index])
 print("prediction:", resp.text)

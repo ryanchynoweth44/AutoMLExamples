@@ -9,6 +9,7 @@ from azureml.train.automl import AutoMLConfig
 import azureml.dataprep as dprep
 import logging, os
 from sklearn.model_selection import train_test_split
+from sklearn.externals import joblib
 
 from app_helper import AppHelper
 helper = AppHelper()
@@ -36,7 +37,7 @@ df = pd.read_csv(helper.local_data_path)
 train, test = train_test_split(df, test_size=.25)
 X_train = train.drop('Survived', axis=1).values
 Y_train = train['Survived'].values
-X_test = test.drop('Survived', axis=1)
+X_test = test.drop('Survived', axis=1).values
 Y_test = test['Survived'].values
 
 
@@ -78,19 +79,23 @@ for run in runs:
     all_metrics[int(properties['iteration'])] = metrics
 
 run_data = pd.DataFrame(all_metrics)
+run_data.head(10)
 
 
 
 ### Getting the best model
 best_run, best_model = local_run.get_output()
 
+local_run.get_ouput()
 
 # predict on test
 y_hat = best_model.predict(X_test)
 
-# # calculate r2 on the prediction
-# acc = np.average(y_hat == Y_test)
-# run.log('r2', np.float(acc))
+
+
+# calculate r2 on the prediction
+acc = np.average(y_hat == Y_test)
+local_run.log('accuracy', np.float(acc))
 
 os.makedirs('outputs', exist_ok=True)
 
@@ -100,5 +105,5 @@ joblib.dump(value=best_model, filename='outputs/local_auto_ml_model.pkl')
 
 
 # upload the model file explicitly into artifacts 
-local_run.upload_file(name = 'auto_ml_model.pkl', path_or_stream = 'outputs/auto_ml_model.pkl')
+local_run.upload_file(name = 'local_auto_ml_model.pkl', path_or_stream = 'outputs/local_auto_ml_model.pkl')
 
