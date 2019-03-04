@@ -15,7 +15,7 @@ Our first step is to set up development environment. For python development I us
     ```
 
 ### Create Azure Resources
-1. We will be using the NYC Taxi Tip Dataset. Please download the data [here](https://bit.ly/2Ezp8dH). Save the file to a `data` folder in your application directory.  
+1. We will be using the Titanic Dataset. Please download the data [here](https://bit.ly/2Ezp8dH). Save the file to a `data` folder in your application directory.  
 
 1. [Create an Azure Storage Account](https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&tabs=azure-portal) and [create a blob container](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal). Then upload the dataset from the previous to the newly created container so that if we want to we can consume the data from our deployed web service in the future. 
 

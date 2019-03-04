@@ -86,8 +86,6 @@ run_data.head(10)
 ### Getting the best model
 best_run, best_model = local_run.get_output()
 
-local_run.get_ouput()
-
 # predict on test
 y_hat = best_model.predict(X_test)
 

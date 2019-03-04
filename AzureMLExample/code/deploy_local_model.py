@@ -4,8 +4,6 @@ import azureml.core
 from azureml.core import Workspace, Run
 from azureml.core.model import Model
 from azureml.core.authentication import ServicePrincipalAuthentication
-
-
 import logging, os
 
 from app_helper import AppHelper
@@ -26,7 +24,6 @@ deploy_folder = os.getcwd()
 mymodel = Model.register(ws, model_name = model_name, model_path = model_path )
 
 score = """
- 
 import pickle
 import json
 import numpy as np
@@ -34,7 +31,7 @@ import os
 import azureml.train.automl
 from sklearn.externals import joblib
 from azureml.core.model import Model
- 
+
 def init():    
   global model
   # retreive the path to the model file using the model name
@@ -50,12 +47,13 @@ def run(raw_data):
     y_hat = model.predict(data)
     
     # you can return any data type as long as it is JSON-serializable
-    return json.dumps({"result":y_hat.tolist()})
+    return y_hat.tolist()
 
   except Exception as e: 
-    return json.dumps('Error': str(e) )
+    return str(e)
     
 """.format(model_name=model_name)
+ 
  
 exec(score)
  
@@ -110,15 +108,19 @@ print(service.scoring_uri)
 import requests
 import json
 
-test_data = pd.read_csv("data/titanic_test.csv").values
+# we don't want to send nan to our webservice. Replace with 0. 
+test_data = pd.read_csv("data/titanic_test.csv").fillna(value=0).values
 # send a random row from the test set to score
 random_index = np.random.randint(0, len(test_data)-1)
-input_data = "{\"data\": [" + str(list(test_data[random_index])) + "]}"
+## we want to use double quotes in our json
+input_data = "{\"data\": [" + str(list(test_data[random_index])).replace("\'", "\"") + "]}"
 
 headers = {'Content-Type':'application/json'}
 
 resp = requests.post(service.scoring_uri, input_data, headers=headers)
 
+
 print("POST to url", service.scoring_uri)
 print("label:", test_data[random_index])
 print("prediction:", resp.text)
+

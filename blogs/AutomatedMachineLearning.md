@@ -5,8 +5,9 @@ Traditionally, the development of predictive solutions is a challenging and time
 1. Select appropriate model
 1. Tune Hyperparameters 
 1. Analyze Results
+1. Repeat
 
-As the industry identified the blockers that make the development of machine learning solutions costly, we aim to figure out a way to automate the process in an attempt to make it easier and faster to deploy intelligent solutions. Therefore, selecting and tuning models can be automated to make the analysis of results easier for non-expert and expert developers.   
+As the industry identified the blockers that make the development of machine learning solutions costly, we (as a community) aim to figure out a way to automate the process in an attempt to make it easier and faster to deploy intelligent solutions. Therefore, selecting and tuning models can be automated to make the analysis of results easier for non-expert and expert developers.   
 
 Automated machine learning is the ability to have a defined dataset with a specific target feature, and automatically iterate over the dataset with different algorithms and combination of input variables to select the best model. The purpose is to make developing this solutions require less resources, less domain knowledge, and less time. 
 
@@ -27,9 +28,11 @@ Once you have featured engineer your dataset the developer simply needs to deter
 
 When given an algorithm type, Auto ML libraries will run iterations over your dataset to determine the best combination features, and best hyperparameters for each algorithm, therefore, in turn it actually trains many models and gives the engineer the best algorithm. 
 
-I would like to highlight the differences between having to engineer columns for machine learning, and selecting the appropriate columns for machine learning. For example, lets assume I want to predict how many point of sale transactions will occur every hour of the day. The raw dataset is likely transactional, therefore, will require a developer to summarize the data at the hour level i.e. grouping, summing, and averaging. But often times developers will create custom functions in order to describe the trends in the dataset. This process is **feature engineering**. 
+I would like to highlight the differences between having to engineer columns for machine learning, and selecting the appropriate columns for machine learning. For example, lets assume I want to predict how many point of sale transactions will occur every hour of the day. The raw dataset is likely transactional, therefore, will require a developer to summarize the data at the hour level i.e. grouping, summing, and averaging. But often times developers will create custom functions in order to describe the trends in the dataset. This process is **feature engineering**.  
 
-**Feature selection** comes after feature engineering. I may summarize my dataset with 10 different columns that I *believe* will be useful, but Auto ML libraries may select the 8 best columns out of the 10. 
+**Feature selection** comes after feature engineering. I may summarize my dataset with 10 different columns that I *believe* will be useful, but Auto ML libraries may select the 8 best columns out of the 10.  
+
+The difference between feature engineering and feature selection is huge. Most libraries will handle common or simple data engineering processes, however, the majority of the time a data engineer will need to manually create those transformations in order to use Auto ML libraries.  
 
 When Auto Machine Learning libraries are used in the development process the output is usually a dataset containing metadata on the training runs and their results. This dataset enables developers to easily choose the best model based off the metrics provided. Being able to choose the best model out of many training iterations with different algorithms and feature columns automatically is that it enables us to easily automate the model selection process for *each* model deployment. With typical machine learning deployments, engineers typically deploy the same algorithm with the same feature columns each time. But with Auto Machine Learning solutions we are able to note only choose the best algorithm, feature combination, and hyper-parameters each time. That means, we can deploy a decision tree model trained on 4 columns one release, the deploy a logistic regression model trained on 5 columns another release without any code edits. This is so simple, yet so awesome about how easy it can be!  
 
@@ -46,4 +49,4 @@ When Auto Machine Learning libraries are used in the development process the out
 
 [Ludwig](https://github.com/uber/ludwig), a TensorFlow based platform for deep learning solutions was released by Uber to enable users with little coding experience. The developer simply needs to provide a training dataset and a configuration file identifying the features and labels desired. 
 
-Check out the libraries above! Automated machine learning is fun to play around with and apply to problems. I will be creating demos and walk throughs of each of these libraries. Once public you will be able to find them on my [GitHub](https://github.com/ryanchynoweth44/AutoMLExamples). 
+Check out the libraries above! Automated machine learning is fun to play around with and apply to problems. I will be creating demos and walk throughs of each of these libraries. Once public you will be able to find them on my [GitHub](https://github.com/ryanchynoweth44/AutoMLExamples).  

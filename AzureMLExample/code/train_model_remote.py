@@ -18,12 +18,10 @@ helper = AppHelper()
 auth_obj = ServicePrincipalAuthentication(helper.tenant_id, helper.username, helper.password)
 ws = Workspace.get(name=helper.aml_workspace_name, auth=auth_obj, subscription_id=helper.subscription_id, resource_group=helper.aml_resource_group )
 
-## Experiment name and project folder
+## Experiment name and project folder, and max nodes for remote compute
 experiment_name = 'azureautoml'
-project_folder = '.'
-nodes = 4
-
-exp = Experiment(ws, experiment_name)
+project_folder = 'remote_automl'
+nodes = 4 
 
 
 dsvm_name = 'dsvmaml'
