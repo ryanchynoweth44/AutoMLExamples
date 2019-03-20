@@ -6,9 +6,9 @@ This repository contains demos, walk through, and blogs about various Auto Machi
 1. Azure Machine Learning
     - [Blog](./blogs/AutoMLwithAzureML.md)
     - Demo and/or Walk through
-        1. [Set up environment](./AzureMLExample/walkthrough/01_EnvironmentSetup.md)
-        1. [Train Model](./AzureMLExample/walkthrough/02_TrainModel.md)
-        1. [Deploy Model](./AzureMLExample/walkthrough/03_DeployModel.md)
+        1. [Set up environment](./AzureML/walkthrough/01_EnvironmentSetup.md)
+        1. [Train Model](./AzureML/walkthrough/02_TrainModel.md)
+        1. [Deploy Model](./AzureML/walkthrough/03_DeployModel.md)
 
 
 
