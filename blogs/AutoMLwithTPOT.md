@@ -11,7 +11,7 @@ Like most automated machine learning libraries TPOT helps automated everything b
 
 In the first part of my automated machine learning series I evaluated the Azure Machine Learning Auto ML library. TPOT is similar in auto machine learning, however, it is unlike Azure Machine Learning because it is a standalone package meant for developing the best models while Azure ML is an end to end platform for managing and deploying models. In my experience TPOT is an excellent package that can be used in union with platforms like Azure ML and MLFlow.  
 
-The best way to familiarize yourself with TPOT is to get started! Check out the demo I have created and the accompanying code on my [GitHub](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/TPOT/01_EnvironmentSetup.md).  
+The best way to familiarize yourself with TPOT is to get started! Check out the demo I have created and the accompanying code on my [GitHub](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/TPOT/walkthrough/01_EnvironmentSetup.md). Please note that staying in line with our Azure Machine Learning Auto ML example we will be using the Titanic Dataset, which is also an [example solution](https://epistasislab.github.io/tpot/examples/#titanic-survival-analysis) provided by the TPOT developers.   
 
 
 

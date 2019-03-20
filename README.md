@@ -11,9 +11,8 @@ This repository contains demos, walk through, and blogs about various Auto Machi
 
 1. TPOT
     - [Blog](.)
-    - [Set up environment](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/TPOT/01_EnvironmentSetup.md)
-    - [Train Model](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/TPOT/02_TrainModel.md)
-
+    - [Set up environment](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/TPOT/walkthrough/01_EnvironmentSetup.md)
+    - [Train Model](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/TPOT/walkthrough/02_TrainModel.md)
 
 
 ## Conclusion
