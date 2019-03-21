@@ -23,7 +23,6 @@ data = data.fillna(-999)
 pd.isnull(data).any()
 
 # drop the cols we don't really care about
-# including 'cabin' since we will replace this with encoding
 data = data.drop(['Name','Ticket','Cabin'], axis=1)
 
 # split data to train and validate
