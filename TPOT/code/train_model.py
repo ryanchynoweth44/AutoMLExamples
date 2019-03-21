@@ -39,10 +39,7 @@ tpot = TPOTClassifier(verbosity=2, max_time_mins=2, max_eval_time_mins=0.04, pop
 tpot.fit(X_train, y_train)
 
 # compare against our validate
-tpot.score(X_validate, y_validate)
-
-# export tpot training script
-tpot.export('tpot_train_model.py')
+validate = tpot.score(X_validate, y_validate)
 
 # export the model
 os.makedirs('outputs', exist_ok=True)
@@ -51,3 +48,6 @@ joblib.dump(value=tpot.fitted_pipeline_, filename='outputs/best_model.pkl')
 # loading and using the best model
 model = joblib.load('outputs/best_model.pkl')
 model.predict(X_validate)
+
+# export tpot training script
+tpot.export('tpot_train_model.py')

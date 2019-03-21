@@ -44,4 +44,46 @@ The dataset that we are using is the popular titanic dataset where we use inform
     data = data.drop(['Name', 'Ticket', 'Cabin'], axis=1)
     ```
 
+1. Since we already have a test file, we will split our training dataset into train and validation. Additionally, since TPOT is built on scikit-learn our input data sources need to be numpy arrays, therefore, we convert them using the `.values`.
+    ```python
+    # split data to train and validate
+    train, validate = train_test_split(data, test_size=.25)
+    X_train = train.drop('class', axis=1).values
+    y_train = train['class'].values
+    X_validate = validate.drop('class', axis=1).values
+    y_validate = validate['class'].values
+    ```
+
+1. To fit our model we simply identify the type of model we want to train, then fit the model as you normally would. One great parameter option is the `max_time_mins` parameter because Auto ML libraries can take a very long time to train the best model. The `max_time_mins` will stop the model training after a specified amount of time and return the best model that it has trained thus far. 
+    ```python
+    # fit our model
+    # max_time_mins will stop the auto ml early
+    tpot = TPOTClassifier(verbosity=2, max_time_mins=2, max_eval_time_mins=0.04, population_size=40)
+    tpot.fit(X_train, y_train)
+    ```
+
+1. We can know take our trained model and compare it to our validation set. 
+    ```python
+    validate = tpot.score(X_validate, y_validate)
+    ```
+
+1. The similarly to other python libraries we can serialize our model and save it to file so that we can use it later.  
+    ```python
+    # export the model
+    os.makedirs('outputs', exist_ok=True)
+    joblib.dump(value=tpot.fitted_pipeline_, filename='outputs/best_model.pkl')
+    ```
+
+1. To test and make sure that we can actually load the model we saved, we will reload it and predict on the validate set once more.  
+    ```python
+    # load the best model and predict
+    model = joblib.load('outputs/best_model.pkl')
+    model.predict(X_validate)
+    ```
+
+1. One of the best features about TPOT is that you can export the best model as a python training script. This gives you the option to not have to use Auto ML to retrain your model. 
+    ```python
+    tpot.export('tpot_train_model.py')
+    ```
+
 
