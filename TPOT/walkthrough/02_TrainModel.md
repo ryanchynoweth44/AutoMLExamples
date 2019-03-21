@@ -4,7 +4,7 @@ In this section of the walk through we will be automatically be training a model
 
 The dataset that we are using is the popular titanic dataset where we use information about each passenger to predict whether or not they survived the catastrophe. For more information about the dataset check out the [Kaggle Competition](https://www.kaggle.com/c/titanic).  
 
-1. We will be using the Titanic Dataset. Please download the data from the GitHub repository [here](). Save the file to a `data` folder in your application directory. Please note that the application directory I will be using is the `TPOT` directory in my repository. 
+1. We will be using the Titanic Dataset. Please download the data from the GitHub repository [here](https://github.com/ryanchynoweth44/AutoMLExamples/tree/master/data). Save the file to a `data` folder in your application directory. Please note that the application directory I will be using is the `TPOT` directory in my repository. 
 
 1. Next we will import all the libraries we need to develop our machine learning model.  
     ```python
