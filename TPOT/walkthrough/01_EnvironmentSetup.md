@@ -8,6 +8,11 @@ Our first step is to set up development environment. For python development I us
     conda create -n myenv python=3.6
     ```
 
+1. Activate the conda environment.
+    ```
+    conda activate myenv
+    ```
+
 1. Next pip install the following. 
     ```
     pip install numpy scipy scikit-learn pandas
@@ -27,4 +32,4 @@ Our first step is to set up development environment. For python development I us
     pip install tpot 
     ```
 
-
+1. Now open up visual studio code, select your new environment, and [train your model](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/TPOT/walkthrough/02_TrainModel.md).

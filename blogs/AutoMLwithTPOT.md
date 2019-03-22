@@ -1,4 +1,4 @@
-## Auto Machine Learning with TPOT
+## Automated Machine Learning with TPOT
 
 For part two of my automated machine learning series I am focusing on [TPOT](https://epistasislab.github.io/tpot/), a python library that uses genetic programming to optimize data science pipelines. TPOT's success and popularity has grown extraordinarily since its initial commit in late 2015. As of March 20, 2019, TPOT has 286 people watching, 5,441 stars, and 969 forks on [GitHub](https://github.com/EpistasisLab/tpot). 
 
