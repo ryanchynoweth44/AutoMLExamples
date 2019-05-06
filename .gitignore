@@ -30,6 +30,7 @@ MANIFEST
 .vscode
 AzureML/code/data/*.csv
 TPOT/code/data/*.csv
+MLBox/data/*.csv
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
