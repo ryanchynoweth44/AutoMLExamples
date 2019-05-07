@@ -32,6 +32,8 @@ MANIFEST
 AzureML/code/data/*.csv
 TPOT/code/data/*.csv
 MLBox/data/*.csv
+MLBox/save/Survived_predictions.csv
+MLBox/save/LightGBM_feature_importance.png
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
