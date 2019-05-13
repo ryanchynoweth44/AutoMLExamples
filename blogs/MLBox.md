@@ -14,13 +14,13 @@ MLBox is an extremely popular and powerful automated machine learning python lib
 - Model interpretation 
 
 
-MLBox is similar to other Automated Machine Learning libraries since it does not automate the data science process. MLBox simply helps developers create the optimal model and select the best features to make predictions for the label of your choice. 
+MLBox is similar to other Automated Machine Learning libraries as it does not automate the data science process, but augments a developers ability to quickly create machine learning models. MLBox simply helps developers create the optimal model and select the best features to make predictions for the label of your choice. 
 
-One draw back of the MLBox library is that it doesn't necessarily conform to a data scientist's process, rather, the data scientist has to work the way the library expects. One example, is that I will often use three datasets when developing machine learning solutions in an attempt to avoid overfitting: train, validation, and test. Having these three datasets is rather difficult to do with MLBox.  
+One draw back of the MLBox library is that it doesn't necessarily conform to a data scientist's process, rather, the data scientist has to work the way the library expects. One example, is that I will often use three datasets when developing machine learning solutions in an attempt to avoid overfitting: train, validation, and test. Having these three datasets is rather difficult to do with MLBox.    
 
 Lets get started using the MLBox library! 
 
-### Developing Using MLBox
+### Developing with MLBox
 
 #### Installing MLBox
 For this demo we will be using Anaconda Virtual Environments, and I will be using Visual Studio Code as my IDE. For more information on how to use the Anaconda distribution with Visual Studio code check out this [blog](https://ryansdataspot.com/2019/02/14/anaconda-environments-in-visual-studio-code/) I wrote. Additionally, I will be developing on a windows machine which is currently in an experimental release.  
@@ -47,7 +47,7 @@ As with the other AutoML libraries we will be using the titanic dataset where we
 
 1. Now that we have our data and MLBox installed, let's read our datasets into memory and start preparing it for a machine learning algorithm. 
 
-    MLBox has its own Reader class for effecient and distributed reading of data, one key feature to this class is that it expects a list of file paths to your training and test datasets. Interacting with my datasets was slightly foreign at first, but once I learned that the Reader class creates a dictionary object with pandas dataframes and our target (label) column as a pandas series it was easier to work with. 
+    MLBox has its own Reader class for efficient and distributed reading of data, one key feature to this class is that it expects a list of file paths to your training and test datasets. Interacting with my datasets was slightly foreign at first, but once I learned that the Reader class creates a dictionary object with pandas dataframes and our target (label) column as a pandas series it was easier to work with. 
 
     ```python
     from mlbox.preprocessing import *
@@ -61,7 +61,7 @@ As with the other AutoML libraries we will be using the titanic dataset where we
     data = reader.train_test_split(train_path, 'Survived')
     ```
 
-    There are a few things worth noting about the `train_test_split` function. The dataset is only considered to be a test set if there is no label column present, otherwise, it will be merged with a train set. Being able to provide a list of file paths is a nice feature to have because it can allow developers to easily ingest many files at once, which is common with bigger datasets and data lakes. Since the function automatically scans for the target column there is little work for the developer to even identify a test dataset. Additionally, it determines whether or not it is a regression or classification problem based off our label and will automitcally encode the column as needed. 
+    There are a few things worth noting about the `train_test_split` function. The dataset is only considered to be a test set if there is no label column present, otherwise, it will be merged with a train set. Being able to provide a list of file paths is a nice feature to have because it can allow developers to easily ingest many files at once, which is common with bigger datasets and data lakes. Since the function automatically scans for the target column there is little work for the developer to even identify a test dataset. Additionally, it determines whether or not it is a regression or classification problem based off our label and will automatically encode the column as needed. 
 
 1. One really nice feature of MLBox is the ability to automatically remove drift variables. I am not an expert when it comes to explaining what drift is by all means, however, drift is the idea that the process or observation behavior may change over time. In turn the data will slowly change resulting in the relationship between the features to change as well. MLBox has built in functionality to deal with this drift. We will use a drift transform.  
     ```python
@@ -69,7 +69,7 @@ As with the other AutoML libraries we will be using the titanic dataset where we
     ```
 
 
-1. As with all Automated Machine Learning libraries, the key feature is not necessarily the algorithms but is the data scientist's ability to select the appropriate features and opimal hyper-parameters for the algorthim. Using MLBox's `Optimiser` class we are able to create a dimensional space to figure out the best set of parameters. Therefore, to optimze we must create a parameter space, and select the scoring metric we wish to optimize. 
+1. As with all Automated Machine Learning libraries, the key feature is not necessarily the algorithms but is the data scientist's ability to select the appropriate features and optimal hyper-parameters for the algorithm. Using MLBox's `Optimiser` class we are able to create a dimensional space to figure out the best set of parameters. Therefore, to optimize  we must create a parameter space, and select the scoring metric we wish to optimize. 
     ```python
     opt = Optimiser(scoring='accuracy', n_folds=3)
     opt.evaluate(None, data)
@@ -92,4 +92,4 @@ As with the other AutoML libraries we will be using the titanic dataset where we
 
 
 
-For more information on MLBox, please check out their [Github](https://github.com/AxeldeRomblay/MLBox) repository or the [official documentation](https://mlbox.readthedocs.io/en/latest/) page. MLBox is a great library to assit data scientists in building a machine learning solution. For a full copy of the demo python file please refer to my personal [Github](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/MLBox/TrainModel.py). 
+For more information on MLBox, please check out their [Github](https://github.com/AxeldeRomblay/MLBox) repository or the [official documentation](https://mlbox.readthedocs.io/en/latest/) page. MLBox is a great library to assist data scientists in building a machine learning solution. For a full copy of the demo python file please refer to my personal [Github](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/MLBox/TrainModel.py). 
