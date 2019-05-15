@@ -25,6 +25,8 @@ Lets get started using the MLBox library!
 #### Installing MLBox
 For this demo we will be using Anaconda Virtual Environments, and I will be using Visual Studio Code as my IDE. For more information on how to use the Anaconda distribution with Visual Studio code check out this [blog](https://ryansdataspot.com/2019/02/14/anaconda-environments-in-visual-studio-code/) I wrote. Additionally, I will be developing on a windows machine which is currently in an experimental release.  
 
+We will also need a linux machine to do our MLBox development, if you do not have one available you can create one by following these [instructions](https://ryansdataspot.com/2019/05/07/linux-development-from-a-windows-guy/). 
+
 1. First let's create a new Anaconda Environment.
     ```
     conda create -n MLBoxEnv python=3.6
