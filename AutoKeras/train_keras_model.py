@@ -10,12 +10,11 @@ import numpy as np
 import tensorflow as tf
 
 output_dir = 'keras_model/'
+os.makedirs(output_dir, exist_ok=True)
 bs = 16
 epochs = 25
 img_width, img_height = 256, 256
-greyscale = False
 nb_channels = 3
-if greyscale: np_channels = 1
 
 if K.image_data_format() == 'channels_first':
     input_shape = (nb_channels, img_width, img_height)
@@ -118,8 +117,6 @@ model.compile(loss='categorical_crossentropy',
               metrics=['acc'])
 
 
-nb_train_samples = 5000
-nb_validation_samples = 1000
 
 # create some callbacks to generate historical metrics
 csv_logger = cb.CSVLogger(output_dir + model_prefix + 'training.log')
@@ -131,6 +128,10 @@ loggers = [csv_logger, early_stop,checkpoints]
 
 
 ############### train our cnn ################
+nb_train_samples = 5000
+nb_validation_samples = 1000
+
+
 training = model.fit_generator(
     train_generator,
     steps_per_epoch=nb_train_samples // bs,
@@ -138,6 +139,7 @@ training = model.fit_generator(
     validation_data=validate_generator,
     validation_steps=nb_validation_samples // bs,
     callbacks=loggers)
+
 
 os.makedirs(output_dir, exist_ok=True)
 # save the models and weights to file
