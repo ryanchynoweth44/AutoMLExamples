@@ -44,6 +44,11 @@ y_train = np.array(train.label)
 
 # instantiate a classifier and fit a network
 clf = ak.ImageClassifier()
-clf.fit(x_train, y_train, time_limit=3600)
 
+import datetime as dt
+t = dt.datetime.now()
+print("Starting time: " + str(t))
+clf.fit(x_train, y_train, time_limit=10800)
+print("End time: " + str(dt.datetime.now()))
+print("Total time: " + str(dt.datetime.now() - t))
 
