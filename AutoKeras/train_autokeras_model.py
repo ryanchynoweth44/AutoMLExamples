@@ -1,10 +1,9 @@
-from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 import autokeras as ak
-from keras.preprocessing.image import load_img, img_to_array
 import os
 import pandas as pd
 import numpy as np
+from PIL import Image, ImageOps
 
 
 # pandas dataframes for datasets with image paths
@@ -20,35 +19,96 @@ for dir in image_dirs:
     "label": dir
     }))
 
+# extract file extensions
+images["file_ext"] = images.apply(lambda x: os.path.splitext(x['filename'])[1], axis=1 )
 images.head()
+
+# need to get rid of bad file extensions
+images["file_ext"].unique()
+images = images.loc[ images['file_ext'].isin(['.jpg', '.png', '.jpeg', '.JPG', '.img']) ]
+images["file_ext"].unique()
 
 
 train, test = train_test_split(images, test_size=0.2 )
 
+####################################
+###### Prep Training Dataset #######
+####################################
 
 # get the file paths we want to load
 files = np.array(train.filepath)
-x_train = []
+labels = np.array(train.label)
+x_train = np.empty((len(files), 200, 200, 3), int)
+y_train = []
 
 # load each image and convert it to an ndarray
 # append each array to a list
 for i in range(0, len(files)):    
-    print(str(i) + "/" + str(len(files)))
-    x = img_to_array(load_img(files[1]))
-    x_train.append(x)
+    print(str(i) + "/" + str(len(files)-1))
+    x = Image.open(files[i])
+    x2 = ImageOps.fit(x, (200,200), Image.ANTIALIAS)
+    arr = np.array(x2)
+    
+    x_train[i] = arr
+    
+    y_train.append(labels[i])
 
-# convert the list of arrays to an array
-x_train = np.array(x_train)
-# convert our labels to numpy array
-y_train = np.array(train.label)
 
+####################################
+######### Prep Train Model #########
+####################################
 # instantiate a classifier and fit a network
-clf = ak.ImageClassifier()
+clf = ak.ImageClassifier(verbose=True)
+
 
 import datetime as dt
 t = dt.datetime.now()
 print("Starting time: " + str(t))
-clf.fit(x_train, y_train, time_limit=10800)
+clf.fit(x_train, y_train, time_limit=1800)
 print("End time: " + str(dt.datetime.now()))
 print("Total time: " + str(dt.datetime.now() - t))
+
+
+clf.final_fit(X_train, Y_train, X_test, Y_test, retrain=True)
+
+
+####################################
+######## Prep Test Dataset #########
+####################################
+
+# get the file paths we want to load
+files = np.array(test.filepath)
+labels = np.array(test.label)
+x_test = np.empty((len(files), 200, 200, 3), int)
+y_test = []
+
+# load each image and convert it to an ndarray
+# append each array to a list
+for i in range(0, len(files)):    
+    print(str(i) + "/" + str(len(files)-1))
+    x = Image.open(files[i])
+    x2 = ImageOps.fit(x, (200,200), Image.ANTIALIAS)
+    arr = np.array(x2)
+    
+    x_test[i] = arr
+    
+    y_test.append(labels[i])
+
+
+# apply model
+y_pred = clf.evaluate(x_test, y_test)
+print(y_pred)
+
+
+####################################
+########## Export Model ############
+####################################
+
+os.makedirs('autokeras_model', exist_ok=True)
+
+clf.export_autokeras_model('autokeras_models/autokeras_images_retrained.h5')
+clf.export_keras_model('models/keras_images_retrained.h5')
+clf.load_searcher().load_best_model().produce_keras_model().save('models/keras_model_1_image_retrained.h5')
+
+
 

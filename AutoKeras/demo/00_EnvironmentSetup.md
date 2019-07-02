@@ -17,8 +17,6 @@ Please complete the following instructions to setup an Anaconda Environment for 
     pip install keras
 
     pip install tensorflow
-    ## gpu version of tensorflow
-    # pip install tensorflow-gpu
 
     pip install pillow
 
