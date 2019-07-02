@@ -64,7 +64,7 @@ clf = ak.ImageClassifier(verbose=True)
 import datetime as dt
 t = dt.datetime.now()
 print("Starting time: " + str(t))
-clf.fit(x_train, y_train, time_limit=3600)
+clf.fit(x_train, y_train, time_limit=2450)
 print("End time: " + str(dt.datetime.now()))
 print("Total time: " + str(dt.datetime.now() - t))
 

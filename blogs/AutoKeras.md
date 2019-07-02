@@ -1,5 +1,7 @@
 # Automated Machine Learning with AutoKeras
 
+In hopes of adding to my AutoML blog series I thought it would be great to touch on automated deep learning libraries as well. When I first started playing around with neural networks I turned towards the popular deep learning library, Keras for my development. Therefore, I decided that my first auto deep learning library should be AutoKeras! 
+
 Deep learning is a subset of machine learning focused on developing predictive models using neural networks, and allows humans to create solutions for object detection, image classification, speech recognition and more. One of the most popular deep learning libraries available is [Keras](https://keras.io), a high-level API to easily run TensorFlow, CNTK, and Theano. The main goal of Keras is to enable developers to quickly iterate and develop neural networks on multiple frameworks. 
 
 Over the last year or so, there has been a lot of development in the AutoML space, which is why I have been writing so many blogs showing off different libraries. AutoML libraries have mostly focused around on traditional machine learning algorithms. Therefore, to take the Keras vision to the next level and increase the speed at which we can create neural networks, the Keras team as been developing the [AutoKeras](https://autokeras.com) library that aims to automatically learn the best architecture and hyper-parameters of a neural network to solve your specific need. 
@@ -15,7 +17,7 @@ The demo I have created walks users through the process of:
 - Train a model with downloaded images using AutoKeras
 
 
-Overall, the autokeras library is rough. It does not work quite as Keras worked, which kind of threw me off, and a lot of the built in functions that makes Keras great are not available. I would not recommend using autokeras for any real neural network development, but the overall idea of using AutoML with Keras strings me greatly. Check out the demo I have provided on [GitHub](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/AutoKeras/demo/00_EnvironmentSetup.md). Please note that I developed the demo on a linux virtual machine, and that environment setup varies by environment. Additionally, GPU support will enable faster training times. 
+Overall, the autokeras library is rough. It does not work quite as Keras worked, which kind of threw me off, and a lot of the built in functions that makes Keras great are not available. I would not recommend using autokeras for any real neural network development, but the overall idea of using AutoML with Keras intrigues me greatly. I would recommend monitoring the library as development continues as it could drammatically improve in the near future. Check out the demo I have provided on [GitHub](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/AutoKeras/demo/00_EnvironmentSetup.md). Please note that I developed the demo on a linux virtual machine, and that environment setup varies by environment. Additionally, GPU support will enable faster training times. 
 
 
 
