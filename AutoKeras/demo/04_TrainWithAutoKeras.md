@@ -115,7 +115,3 @@ In this demo we will be walking through a very quick example of how to train a n
     clf.load_searcher().load_best_model().produce_keras_model().save('models/keras_model_1_image_retrained.h5')
     ```
 
-1. We won't get into deployment options here, but you will want to utilize the `load` function to load a trained model from file into memory to make predictions on incoming images. 
-    ```python
-
-    ```
