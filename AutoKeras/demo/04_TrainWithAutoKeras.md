@@ -63,6 +63,8 @@ In this demo we will be walking through a very quick example of how to train a n
         x_train[i] = arr
         
         y_train.append(labels[i])
+
+    y_train = np.array(y_train)
     ```
 
 1. Now lets train a model! I am adding in a few timestamps to see how long it takes to train a model. Note that the final fit model gets the best model we trained and fits it to the `clf` object for us to save out to a file.   
@@ -76,8 +78,6 @@ In this demo we will be walking through a very quick example of how to train a n
     clf.fit(x_train, y_train, time_limit=3600)
     print("End time: " + str(dt.datetime.now()))
     print("Total time: " + str(dt.datetime.now() - t))
-
-    clf.final_fit(X_train, Y_train, X_test, Y_test, retrain=True)
     ```
 
 1. We will want to evaluate our model on our test dataset as well. So we will need to format our test data as a numpy array and apply our model to the dataset.  
@@ -100,6 +100,9 @@ In this demo we will be walking through a very quick example of how to train a n
         
         y_test.append(labels[i])
 
+    y_test = np.array(y_test)
+
+    clf.final_fit(X_train, Y_train, X_test, Y_test, retrain=True)
 
     # apply model
     y_pred = clf.evaluate(x_test, y_test)

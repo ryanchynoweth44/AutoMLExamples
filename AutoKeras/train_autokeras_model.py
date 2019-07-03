@@ -53,6 +53,7 @@ for i in range(0, len(files)):
     
     y_train.append(labels[i])
 
+y_train = np.array(y_train)
 
 ####################################
 ######### Prep Train Model #########
@@ -64,13 +65,9 @@ clf = ak.ImageClassifier(verbose=True)
 import datetime as dt
 t = dt.datetime.now()
 print("Starting time: " + str(t))
-clf.fit(x_train, y_train, time_limit=2450)
+clf.fit(x_train, y_train, time_limit=7200)
 print("End time: " + str(dt.datetime.now()))
 print("Total time: " + str(dt.datetime.now() - t))
-
-
-
-clf.final_fit(X_train, Y_train, X_test, Y_test, retrain=True)
 
 
 ####################################
@@ -95,6 +92,10 @@ for i in range(0, len(files)):
     
     y_test.append(labels[i])
 
+y_test = np.array(y_test)
+
+clf.final_fit(x_train, y_train, y_test, y_test, retrain=True)
+
 
 # apply model
 y_pred = clf.evaluate(x_test, y_test)
@@ -107,9 +108,9 @@ print(y_pred)
 
 os.makedirs('autokeras_model', exist_ok=True)
 
-clf.export_autokeras_model('autokeras_models/autokeras_images_retrained.h5')
-clf.export_keras_model('models/keras_images_retrained.h5')
-clf.load_searcher().load_best_model().produce_keras_model().save('models/keras_model_1_image_retrained.h5')
+clf.export_autokeras_model('autokeras_model/autokeras_images_retrained.h5')
+clf.export_keras_model('autokeras_model/keras_images_retrained.h5')
+clf.load_searcher().load_best_model().produce_keras_model().save('autokeras_modelmodels/keras_model_1_image_retrained.h5')
 
 
-
+clf.export_autokeras_model
