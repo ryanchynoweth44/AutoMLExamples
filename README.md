@@ -19,7 +19,7 @@ This repository contains demos, walk through, and blogs about various Auto Machi
     - [Train Model](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/MLBox/TrainModel.py)
 
 1. AutoKeras
-    - [Blob - TBD](.)
+    - [Blog - TBD](.)
     - [Set up environment](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/AutoKeras/demo/00_EnvironmentSetup.md)
     - [Download Images](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/AutoKeras/demo/01_DownloadImages.md)
     - [Train with Keras](https://github.com/ryanchynoweth44/AutoMLExamples/blob/master/AutoKeras/demo/02_TrainWithKeras.md)
