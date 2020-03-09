@@ -1,6 +1,7 @@
 # Auto ML Examples
 This repository contains demos, walk through, and blogs about various Auto Machine Learning Libraries. 
 
+PLEASE NOTE THAT THIS REPOSITORY IS NOT ACTIVELY MAINTAINED, BUT WILL BE UPDATED AS ISSUES ARE CREATED.  
 
 ## Content
 1. Azure Machine Learning
